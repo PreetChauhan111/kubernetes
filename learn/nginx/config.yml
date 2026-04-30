@@ -1,0 +1,12 @@
+# Sample pod config
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx
