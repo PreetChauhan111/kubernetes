@@ -1,0 +1,14 @@
+# kubectl run nginx --image=nginx --dry-run=client -o yaml > pod-new.yml <- Output of this command
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    run: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
