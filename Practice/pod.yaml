@@ -1,16 +1,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: memory-demo
-  namespace: mem-example
+  name: secrets
+  labels:
+    app.kubernetes.io/name: secrets
 spec:
   containers:
-  - name: memory-demo-ctr
-    image: polinux/stress
-    resources:
-      requests:
-        memory: "100Mi"
-      limits:
-        memory: "200Mi"
-    command: ["stress"]
-    args: ["--vm", "1", "--vm-bytes", "150M", "--vm-hang", "1"]
+  - name: secrets
+    image: nginx
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: backend-user
+            key: backend-username
+      - name: DB_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: db-user
+            key: db-username
